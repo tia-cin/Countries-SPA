@@ -1,24 +1,23 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
-const { Recipe, conn } = require('../../src/db.js');
+const { Country, conn } = require('../../src/db.js');
 
 const agent = session(app);
-const recipe = {
-  name: 'Milanea a la napolitana',
+const country = {
+  name: 'Argentina',
 };
 
-describe('Recipe routes', () => {
+describe('Country routes', () => {
   before(() => conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   }));
-  beforeEach(() => Recipe.sync({ force: true })
-    .then(() => Recipe.create(recipe)));
-  describe('GET /recipes', () => {
+  beforeEach(() => Country.sync({ force: true })
+    .then(() => Country.create(pokemon)));
+  describe('GET /countries', () => {
     it('should get 200', () =>
-      agent.get('/recipes').expect(200)
+      agent.get('/countries').expect(200)
     );
   });
 });
