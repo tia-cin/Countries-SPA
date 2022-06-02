@@ -1,37 +1,33 @@
-export const GET_RECIPES = 'GET_RECIPES'
-export const GET_TYPES_OF_DIETS = 'GET_TYPES_OF_DIETS'
-export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL'
-export const CREATE_RECIPE = 'CREATE_RECIPE'
-export const FILTER_BY_NAME = 'FILTER_BY_NAME'
-export const FILTER_BY_DIET = 'FILTER_BY_DIET'
-export const ORDER_RECIPES = 'ORDER_RECIPES'
+export const GET_COUNTRIES = 'GET_COUNTRIES'
+export const GET_ACTIVITIES = 'GET_ACTIVITIES'
+export const GET_COUNTRY_INFO = 'GET_COUNTRY_INFO'
+export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
+export const ORDER_COUNTRIES_POPULATION = 'ORDER_COUNTRIES';
+export const ORDER_COUNTRIES_NAME = 'ORDER_COUNTRIES_NAME'
+export const FILTER_CONTINENT = 'FILTER_CONTINENT'
+export const FILTER_ACTIVITY = 'FILTER_ACTIVITY'
+export const SEARCH_COUNTRY = 'SEARCH_COUNTRY'
 
 const axios = require('axios')
 
-// unir ruta /recipes 
-export function getRecipes() {
-    // console.log('getrecipes' +name, order, page,diet)
-    return async (dispatch) => {
-        try {
-            let recipes = await axios(`http://localhost:3001/recipes` )
-            return dispatch({
-                type: GET_RECIPES,
-                payload: recipes.data,
-            })
-        } catch (error) {
-            console.log(error)
-        }
+export let getCountries = () => {
+    return (dispatch) => {
+        axios.get('http://localhost:3001/countries')
+            .then(r => dispatch({
+                type:GET_COUNTRIES,
+                payload: r.data
+            }))
+            .catch(error => console.log(error))
     }
 }
 
-// unir ruta /types
-export function getDiets() {
+export let getActivities = () => {
     return async (dispatch) => {
         try {
-            let diets = await axios('http://localhost:3001/types')
+            let activities = await axios.get('http://localhost:3001/activity')
             return dispatch({
-                type: GET_TYPES_OF_DIETS,
-                payload: diets.data,
+                type: GET_ACTIVITIES,
+                payload: activities.data
             })
         } catch(error) {
             console.log(error)
@@ -39,30 +35,24 @@ export function getDiets() {
     }
 }
 
-// unir ruta /recipes/:idRecipes
-export function getRecipeDetail(id) {
-    console.log(id)
-    return async (dispatch) => {
-        try{
-            let recipeDetail = await axios(`http://localhost:3001/recipes/${id}`)
-            return dispatch({
-                type: GET_RECIPE_DETAIL,
-                payload: recipeDetail.data
-            })
-        } catch(error){
-            console.log(error)
-        }
+export let getCountryInfo = (payload) => {
+    return (dispatch) => {
+        axios.get('http://localhost:3001/countries/' + payload)
+            .then(r => dispatch({
+                type: GET_COUNTRY_INFO,
+                payload: r.data
+            }))
+            .catch(error => console.log(error))
     }
 }
 
-// unir ruta /recipe
-export function createRecipe(payload) {
+export let createActivity = (payload) => {
     return async (dispatch) => {
         try {
-            let newRecipe = await axios('http://localhost:3001/recipe', payload)
+            let newActivity = await axios.post('http://localhost:3001/activity', payload)
             return dispatch({
-                type: CREATE_RECIPE,
-                payload: newRecipe.data
+                type: CREATE_ACTIVITY,
+                payload: newActivity.data
             })
         } catch(error) {
             console.log(error)
@@ -70,14 +60,12 @@ export function createRecipe(payload) {
     }
 }
 
-// unir ruta /recipes?name=...
-export function filterByName(payload) {
+export let orderCountriesPopulation = (payload) => {
     return async (dispatch) => {
         try {
-            let recipe = await axios(`http://localhost:3001/recipes?name=${payload}`)
             return dispatch({
-                type: FILTER_BY_NAME,
-                payload: recipe.data
+                type: ORDER_COUNTRIES_POPULATION,
+                payload: payload
             })
         } catch (error) {
             console.log(error)
@@ -85,18 +73,55 @@ export function filterByName(payload) {
     }
 }
 
-// crear action para filtrar por diets
-export function filterByDiets (payload) {
-    return {
-        type: FILTER_BY_DIET,
-        payload: payload
+export let orderCountriesName = (payload) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: ORDER_COUNTRIES_NAME,
+                payload: payload
+            })
+        } catch(error) {
+            console.log(error)
+        }
     }
 }
 
-// crear action para ordenar recipes
-export function orderRecipes (payload) {
-    return {
-        type: ORDER_RECIPES,
-        payload: payload
+export let filterContinent = (payload) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_CONTINENT,
+                payload: payload
+            })
+        } catch(error) {
+             console.log(error)
+        }
+    }
+}
+
+export let filterActivity = (payload) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type: FILTER_ACTIVITY,
+                payload: payload
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export let searchCountry = (payload) => {
+    return async (dispatch) => {
+        try {
+            let countries = await axios.get('http://localhost:3001/countries?name=' + payload)
+            return dispatch({
+                type: SEARCH_COUNTRY,
+                payload: countries.data
+            })
+        } catch (error) {
+            console.log(error)
+        }       
     }
 }
