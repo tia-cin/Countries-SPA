@@ -1,0 +1,38 @@
+:root {
+    --dark: #2E4756;
+    --medium: #3C7A89;
+    --ligth-medium: #9FA2B2;
+    --ligth: #DBC2CF;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.button {
+    border-radius: 10px;
+    color: black;
+    font-size: 1vw;
+    font-weight: bold;
+    padding: .5vw;
+    border: solid 0.3vw black;
+    background-color: var(--ligth-medium);
+}
+.button:hover {
+    cursor: pointer;
+    transition: .5s;
+    color: white;
+    background-color: var(--dark);
+    box-shadow: 9px 13px 21px 1px #141010;
+}
+.input {
+    padding: 1vw;
+    border-radius: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .button {
+        font-size: 2vw;
+    }
+
+}

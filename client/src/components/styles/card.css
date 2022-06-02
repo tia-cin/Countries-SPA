@@ -1,0 +1,82 @@
+:root {
+    --dark: #2E4756;
+    --medium: #3C7A89;
+    --ligth-medium: #9FA2B2;
+    --ligth: #DBC2CF;
+  }
+  .container {
+    border: solid .3vw black;
+    background-color: var(--ligth-medium);
+    color: var(--ligth);
+    width: 20vw;
+    margin: 2vw;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2vw;
+    animation: cardsDisplay 1s ease 0s 1 normal forwards;
+}
+.container:hover {
+    transition: .5s;
+    /* animation: cardHover 2s ease 0s 1 normal forwards; */
+}
+.img img {
+    border-radius: 20px;
+    width: 20vw;
+}
+.button {
+    border-radius: 10px;
+    align-items: flex-end;
+    padding: .5vw .8vw;
+    margin: .5vw;
+    border: solid .2vw black;
+    font-size: 1vw;
+    font-weight: bold;
+    color: black;
+    background-color: var(--ligth-medium);
+}
+.button:hover {
+    cursor: pointer;
+    transition: .5s;
+    color: white;
+    background-color: var(--dark);
+    box-shadow: 9px 13px 21px 1px #141010;
+}
+.titles {
+    color: black;
+}
+/* @keyframes cardHover {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(1.1);
+    }
+  
+    100% {
+      transform: scale(1);
+    } 
+}*/
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 50vw;
+    }
+    .button {
+        padding: 1vw;
+        font-size: 2vw;
+    }
+}
+@keyframes cardsDisplay {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+      
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

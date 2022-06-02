@@ -1,17 +1,18 @@
 import { React, useEffect, useState } from 'react'; // hooks
 import { useSelector, useDispatch } from 'react-redux'; // hooks
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import Card from './Card';
+import SearchBar from './searchbar';
+import Card from './card';
 import { 
     getActivities, 
     getCountries, 
     orderCountriesName, 
     orderCountriesPopulation, 
     filterActivity, 
-    filterContinent } from '../Actions';
-import style from './Style/Home.module.css'
-import Paginado from './Paginado';
+    filterContinent 
+} from '../actions';
+import style from './styles/home.css'
+import Paginado from './pagination';
 
 const Home = () => {
     let dispatch = useDispatch()

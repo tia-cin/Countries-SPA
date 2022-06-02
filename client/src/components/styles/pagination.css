@@ -1,0 +1,32 @@
+:root {
+    --dark: #2E4756;
+    --medium: #3C7A89;
+    --ligth-medium: #9FA2B2;
+    --ligth: #DBC2CF;
+  }
+.container {
+    margin: 2vw 0;
+}
+.number {
+    border-radius: 10px;
+    border: solid 0.2vw black; 
+    font-size: 1.2vw;   
+    color: black;
+    background-color: var(--ligth-medium);
+    margin-left: .2vw;
+}
+.number:hover {
+    cursor: pointer;
+    transition: .5s;
+    color: white;
+    background-color: var(--dark);
+    box-shadow: 9px 13px 21px 1px #141010;
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        margin: 3vw;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        gap: 1vw 5vw
+    }
+}
