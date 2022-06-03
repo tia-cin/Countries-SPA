@@ -17,6 +17,12 @@ const createActivity = async (req, res) => {
     try{
         let { name, difficulty, duration, season, countries } = req.body
         let newActivity = await Activity.bulkCreate({ name, difficulty, duration, season })
+        countries.forEach(async country => {
+            let activityCountry = await Country.findOne({
+                where: { name: country }
+            }) 
+            await newActivity.addCountry(activityCountry)
+        });
         return res.send(newActivity)
     } catch(error) {
         console.log(error)
