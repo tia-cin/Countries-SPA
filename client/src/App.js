@@ -16,8 +16,8 @@ function App() {
           <Route path='/countries' element={<Home/>}/>
           <Route path='/countries/:id' element={<CountryDetail/>}/>
           <Route path='/activity' element={<CreateActivity/>}/>
+          <Route path='about' element={<Credits/>}/>
         </Routes> 
-        <Credits/>
       </div>
     </BrowserRouter>
   );

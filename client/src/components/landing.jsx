@@ -5,11 +5,17 @@ import style from './styles/landing.css'
 const LandingPage = () =>{
     return (
         <div className={style.container}>
-            <h1 className={style.title}>Welcome to Countries App</h1>
-            <span className={style.credit}>© Cintia Arce</span>
-            <Link to='/countries'>
-                <button className={style.button}>Start</button>
-            </Link>
+            <div>
+                <h1 className='text-white fs-xxl'>Countries App</h1>
+            </div>
+            <div>
+                <span className='text-light'>Discover all the countries in the world and add turistic activities</span>
+            </div>
+            <div>
+                <Link to='/countries'>
+                    <button className={style.button}>Start</button>
+                </Link>
+            </div>
         </div>
     )
 }
