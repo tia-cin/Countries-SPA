@@ -5,19 +5,21 @@ const { Sequelize } = require('sequelize')
 const countriesApi = async () => {
     try {
         const apiUrl = await axios.get('https://restcountries.com/v3/all');
-        const allCountries = await apiUrl.data.map(country => {
+        const allCountries = await apiUrl.data && apiUrl.data.map(country => {
             return {
-                name: country.name.common,
-                id: country.cca3,
-                flag: country.flags[0] ? country.flags[0] : 'No se encontro bandera',
-                continent: country.continents,
-                capital: country.capital ? country.capital.join(', ') : 'No se encontro capital',
-                subregion: country.subregion,
-                area: country.area,
-                population: country.population
+                name: country.name.common ? country.name.common : 'No name',
+                id: country.cca3 ,
+                flag: country.flags[0] ? country.flags[0] : 'No flag',
+                continent: country.continents ? country.continents[0]: 'No continent',
+                capital: country.capital ? country.capital[0] : 'No capital',
+                region: country.region ? country.region :  'No region',
+                subregion: country.subregion ? country.subregion : 'No subregion',
+                area: country.area ? country.area : 'No area',
+                population: country.population,
+                status: country.status ? country.status: 'No status'
             }
         });
-        return allCountries;
+        return allCountries ? allCountries : new Error('Wrong api call');
     } catch (error) {
         console.log(error)
     }
@@ -50,14 +52,14 @@ const getCountries = async (req, res) => {
         })
         countryName.length ?
         res.status(200).send(countryName) :
-        res.status(404).send('No se encontro el pais')
+        res.status(404).send('No country')
     } else {
         let full = await Country.findAll({
             include: {
                 model: Activity
             }
         })
-        res.status(200).send(full)
+        res.status(200).send(full ? full : 'No countries')
     }
 }
 
@@ -69,7 +71,7 @@ const getCountry = async (req, res) => {
         }
     })
     if (country) return res.status(200).send(country)
-    else return res.send('No se encontro el país')
+    else return res.send('No country')
 }
 
 

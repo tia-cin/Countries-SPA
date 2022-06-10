@@ -10,11 +10,12 @@ module.exports = (sequelize) => {
     },
     id: {
       type: DataTypes.STRING,
-      allowNull: false,
       primaryKey: true,
+      allowNull: false,
     },
     flag: {
       type: DataTypes.STRING,
+      allowNull: false,
       allowNull: false,
     },
     continent: {
@@ -25,14 +26,25 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    region: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     subregion: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     area: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     population: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 };

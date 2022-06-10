@@ -7,7 +7,7 @@ const allActivities = async (req, res) => {
             include: Country
         })
         if (activities) return res.send(activities)
-        else return res.send('No se encontraron actividades')
+        else return res.send('No activities')
     } catch (error) {
         console.log(error)
     }
@@ -21,12 +21,12 @@ const createActivity = async (req, res) => {
             let activityCountry = await Country.findOne({
                 where: { name: country }
             }) 
-            await newActivity.addCountry(activityCountry)
+            await newActivity.addCountry(activityCountry, { through : 'country-activity'})
         });
-        return res.send(newActivity)
+        return res.send(newActivity ? newActivity : 'Failed activity')
     } catch(error) {
         console.log(error)
-        return res.send('No se pudo crear la actividad')
+        return res.send('Failed activity')
     }
 }
 
